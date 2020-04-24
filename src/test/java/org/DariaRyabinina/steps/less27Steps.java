@@ -1,8 +1,10 @@
-package org.DariaRuabinina.steps;
+package org.DariaRyabinina.steps;
 
 import com.codeborne.selenide.Selenide;
 import io.cucumber.java.ru.Допустим;
 import org.DariaRyabinina.Less27Obj;
+import org.DariaRyabinina.config.ConfigReader;
+import org.DariaRyabinina.config.PropertiesConfigReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -17,10 +19,12 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class less27Steps {
     public static final Logger LOGG = LoggerFactory.getLogger(less27Steps.class);
+    private ConfigReader configReader = new PropertiesConfigReader();
 
     @Допустим("выполнен переход на https: www_sberbank")
     public void go_to_https_www_sberbank() {
-        open("https://www.sberbank.ru/");
+        open(configReader.getValue("sber.url"));
+
         getWebDriver().manage().window().maximize();
 
 
@@ -101,5 +105,3 @@ public class less27Steps {
         Selenide.switchTo().window(1);
     }
 }
-
-

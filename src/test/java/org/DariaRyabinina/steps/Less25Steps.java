@@ -1,10 +1,12 @@
-package org.DariaRuabinina.steps;
+package org.DariaRyabinina.steps;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
+import org.DariaRyabinina.config.ConfigReader;
+import org.DariaRyabinina.config.PropertiesConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -17,17 +19,19 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
 public class Less25Steps {
+    private ConfigReader configReader = new PropertiesConfigReader();
+
     @Дано("Пользователь авторизуется в bspb")
     public void пользователь_авторизуется_в_bspb() {
-        open("https://idemo.bspb.ru/");
+        open(configReader.getValue("bspb.url"));
     }
 
 
     @Дано("Входит на поле очищает и вставляет Логин/Пароль {string}")
-    public void входит_на_поле_Логин_очищает_и_вставляет_Логин(String value) {
+    public void входит_на_поле_ЛогинПароль_очищает_и_вставляет_ЛогинПароль(String value) {
         SelenideElement loginFiled = $(byName("username"));
         loginFiled.clear();
-        loginFiled.setValue(value);
+        loginFiled.setValue(configReader.getValue(value));
     }
 
     @Когда("нажимает кнопку Войти")

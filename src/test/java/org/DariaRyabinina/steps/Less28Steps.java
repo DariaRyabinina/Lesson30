@@ -1,21 +1,24 @@
-package org.DariaRuabinina.steps;
+package org.DariaRyabinina.steps;
 
 import io.cucumber.java.ru.Допустим;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import org.DariaRyabinina.Less28Obj;
+import org.DariaRyabinina.config.ConfigReader;
+import org.DariaRyabinina.config.PropertiesConfigReader;
 import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class Less28Steps {
+    private ConfigReader configReader = new PropertiesConfigReader();
 
 
     @Допустим("переход Авто.ру")
     public void go_to_auto_ru() {
-        open("https://www.auto.ru/");
+        open(configReader.getValue("auto.url"));
         getWebDriver().manage().window().maximize();
     }
 
@@ -64,5 +67,3 @@ public class Less28Steps {
     }
 
 }
-
-

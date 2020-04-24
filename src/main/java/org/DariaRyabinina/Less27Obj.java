@@ -1,4 +1,4 @@
-package org.DariaRuabinina;
+package org.DariaRyabinina;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -21,6 +21,7 @@ public class Less27Obj {
     public static final Logger LOGG = LoggerFactory.getLogger(Less27Obj.class);
 
     public boolean getTitle(String nameTitle) {
+        System.out.println( Selenide.title() + "  |  " +nameTitle);
         return Selenide.title().equals(nameTitle);
     }
 

@@ -1,4 +1,4 @@
-package org.DariaRuabinina;
+package org.DariaRyabinina;
 
 import com.codeborne.selenide.Selenide;
 import org.slf4j.Logger;

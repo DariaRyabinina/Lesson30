@@ -1,4 +1,4 @@
-package org.DariaRuabinina;
+package org.DariaRyabinina;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 @CucumberOptions(plugin = "json:target/cucumber-report.json",
         features = "src/test/resources/feature",
         glue = "org.DariaRyabinina.steps",
-        tags = "@less25"
+        tags = "@allTest"
 )
 
 public class Less29_1 extends AbstractTestNGCucumberTests {
