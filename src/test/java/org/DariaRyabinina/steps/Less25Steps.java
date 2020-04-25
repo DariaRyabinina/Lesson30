@@ -1,5 +1,6 @@
 package org.DariaRyabinina.steps;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.ru.Дано;
@@ -99,7 +100,7 @@ public class Less25Steps {
 
     @Тогда("Проверка, наличия поля Моих средств")
     public void проверка_наличия_поля_Моих_средств() {
-        String myMoney = $(By.xpath("//small[@class='my-assets']")).getText();
+        String myMoney = $(By.xpath("//small[@class='my-assets']")).waitUntil(Condition.visible, 5000).getText();
         myMoney = myMoney.replaceAll("[^(а-яёА-ЯЁ), ]", "").trim();
         Assert.assertEquals(myMoney, "Моих средств");
     }

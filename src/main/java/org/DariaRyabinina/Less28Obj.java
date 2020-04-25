@@ -1,5 +1,6 @@
 package org.DariaRyabinina;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class Less28Obj {
     }
 
     public void compareNambe() {
-        String namberOnButton = ($(byCssSelector("span.ButtonWithLoader__content")).getText()).replaceAll("[^(0-9)]", "");
+        String namberOnButton = ($(byCssSelector("span.ButtonWithLoader__content")).waitUntil(Condition.visible, 5000).getText()).replaceAll("[^(0-9)]", "");
         LOGG.info("Сравнение количества объявлений {} - {}", namberOnButton, namberАnnoun);
         Assert.assertEquals(namberOnButton, namberАnnoun);
 

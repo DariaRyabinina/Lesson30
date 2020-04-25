@@ -1,5 +1,5 @@
 # language: ru
-@allTest
+@allTests
 @less25
 Функционал: Работа на bspb
 

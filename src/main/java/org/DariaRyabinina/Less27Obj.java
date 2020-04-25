@@ -1,5 +1,6 @@
 package org.DariaRyabinina;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,11 +21,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public class Less27Obj {
     public static final Logger LOGG = LoggerFactory.getLogger(Less27Obj.class);
 
-    public boolean getTitle(String nameTitle) {
-        System.out.println( Selenide.title() + "  |  " +nameTitle);
-        return Selenide.title().equals(nameTitle);
-    }
-
     public void movement_cursor(String nameMenu) {
         Actions actions = new Actions(getWebDriver());
         LOGG.info($(byXpath("//span[text()='" + nameMenu + "']")).getText());
@@ -33,8 +29,8 @@ public class Less27Obj {
     }
 
     public void goToMenu(String nameMenu) {
-        LOGG.info($(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).getText());
-        $(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).doubleClick();
+        LOGG.info($(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 3000).getText());
+        $(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 5000).doubleClick();
     }
 
     public void go_to_menu_vklad(String nameMenu) {
@@ -42,7 +38,7 @@ public class Less27Obj {
         List<SelenideElement> listMenuVklad = $$(byCssSelector("li.tabs-container__tab"));
         listMenuVklad.get(1).doubleClick();
 
-        $(byCssSelector(".cookie-warning__close")).click();
+        $(byCssSelector(".cookie-warning__close")).waitUntil(Condition.visible, 3000).click();
     }
 
     public void visibleCheckBox(List<String> checkBoxList) {
@@ -100,7 +96,7 @@ public class Less27Obj {
 
     public void enterCheckBox(List<String> entrChecBoxValue) {
         for (String entrbChecBox : entrChecBoxValue) {
-            $(byXpath("//div[text()='" + entrbChecBox + "']/preceding-sibling::div")).click();
+            $(byXpath("//div[text()='" + entrbChecBox + "']/preceding-sibling::div")).waitUntil(Condition.visible, 3000).click();
         }
     }
 

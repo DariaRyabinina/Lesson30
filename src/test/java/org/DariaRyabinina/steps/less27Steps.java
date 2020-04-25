@@ -1,6 +1,8 @@
 package org.DariaRyabinina.steps;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.ru.Допустим;
 import org.DariaRyabinina.Less27Obj;
 import org.DariaRyabinina.config.ConfigReader;
@@ -32,13 +34,11 @@ public class less27Steps {
 
     @Допустим("проверка названия титула {string}")
     public void verify_Title(String nameTitle) {
-        Less27Obj less27Obj = new Less27Obj();
-        boolean a = less27Obj.getTitle(nameTitle);
-        System.out.println(a);
-        if (!a) {
-            Assert.fail();
-        }
+        LOGG.info(Selenide.title());
+        LOGG.info(nameTitle);
+        Assert.assertEquals(Selenide.title(), nameTitle);
     }
+
 
     @Допустим("выполнен переход на вкладку {string}")
     public void go_to_(String nameMenu) {
@@ -103,5 +103,6 @@ public class less27Steps {
     @Допустим("переключение на новое окно")
     public void swich_to_window() {
         Selenide.switchTo().window(1);
+
     }
 }

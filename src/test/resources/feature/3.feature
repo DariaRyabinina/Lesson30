@@ -1,5 +1,5 @@
 #language: ru
-@allTest
+@allTests
 @less28
 
 Функционал: работа на https://auto.ru/
