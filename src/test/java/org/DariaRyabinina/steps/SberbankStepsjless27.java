@@ -65,11 +65,7 @@ public class SberbankStepsjless27 {
 
     @Допустим("проверка отражения вкладов")
     public void verefyVklad1(List<String> vkladList) {
-        if (SberbankPageless27.checkVisibleVklad(vkladList)) {
-            LOGG.info("Вклад совпадает");
-        } else {
-            LOGG.info("Вклад не совпадает");
-        }
+        Assert.assertTrue(SberbankPageless27.checkVisibleVklad(vkladList),"Вклад не совпадает");
     }
 
     @Допустим("установка чек-боксов")

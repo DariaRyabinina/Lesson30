@@ -21,7 +21,6 @@ public class Less29_1 extends AbstractTestNGCucumberTests {
     @BeforeMethod
     public void initDriver() {
 
-
         Configuration.browser = configReader.getValue("browser");
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
