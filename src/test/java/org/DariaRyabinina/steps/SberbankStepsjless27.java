@@ -13,15 +13,14 @@ import org.testng.Assert;
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
 public class SberbankStepsjless27 {
     public static final Logger LOGG = LoggerFactory.getLogger(SberbankStepsjless27.class);
     private ConfigReader configReader = new PropertiesConfigReader();
-    protected SberankPageLess27 less27ObjSber = new SberankPageLess27();
+    protected SberankPageLess27 SberbankPageless27 = new SberankPageLess27();
 
     @Допустим("выполнен переход на https: www_sberbank")
     public void goToHttpsWwwSberbank() {
@@ -40,21 +39,21 @@ public class SberbankStepsjless27 {
 
     @Допустим("выполнен переход на вкладку {string}")
     public void goTo1(String nameMenu) {
-        less27ObjSber.movCursor(nameMenu);
-        less27ObjSber.goToMenu("Вклады");
+        SberbankPageless27.movCursor(nameMenu);
+        SberbankPageless27.goToMenu("Вклады");
         LOGG.info("Выполнен переход на вкладку {}", nameMenu);
     }
 
     @Допустим("выполнен переход на меню \"Подобрать вклад\"")
     public void goToMenuVklad1() {
-        less27ObjSber.openMenuVklad();
+        SberbankPageless27.openMenuVklad();
         LOGG.info("Выполнен переход на меню \"Подобрать вклад\"");
 
     }
 
     @Допустим("проверка отображения чек-боксов")
     public void verifyCheckBox1(List<String> checkBoxList) {
-        less27ObjSber.visibleCheckBox(checkBoxList);
+        SberbankPageless27.visibleCheckBox(checkBoxList);
 
     }
 
@@ -66,7 +65,7 @@ public class SberbankStepsjless27 {
 
     @Допустим("проверка отражения вкладов")
     public void verefyVklad1(List<String> vkladList) {
-        if (less27ObjSber.checkVisibleVklad(vkladList)) {
+        if (SberbankPageless27.checkVisibleVklad(vkladList)) {
             LOGG.info("Вклад совпадает");
         } else {
             LOGG.info("Вклад не совпадает");
@@ -75,13 +74,13 @@ public class SberbankStepsjless27 {
 
     @Допустим("установка чек-боксов")
     public void enterCheckBox1(List<String> entrChecBoxValue) {
-        less27ObjSber.enterCheckBox(entrChecBoxValue);
+        SberbankPageless27.enterCheckBox(entrChecBoxValue);
 
     }
 
     @Допустим("проверка отображения вкладов Отсутствуют")
     public void verefyVkladDel1(List<String> vkladListDel) {
-        less27ObjSber.visibleVkladDel(vkladListDel);
+        SberbankPageless27.visibleVkladDel(vkladListDel);
     }
 
     @Допустим("нажать кнопку Подробнее")
@@ -90,14 +89,16 @@ public class SberbankStepsjless27 {
 
     }
 
-    @Допустим("проверка надписи Вклад Управляй.")
-    public void verefyValue1() {
-        less27ObjSber.verefyValue();
+    @Допустим("проверка надписи {string}")
+    public void verefyValue1(String vkladName) {
+        Assert.assertTrue(SberbankPageless27.getVkladByName(vkladName),"Вклад не соотвтетствует ожидаемому");
     }
 
     @Допустим("переключение на новое окно")
-    public void swichToWindow1() {
-        Selenide.switchTo().window(1);
+    public void swichToWindow1() throws InterruptedException {
+        switchTo().window(1);
+        Thread.sleep(5000);
+
 
     }
 }

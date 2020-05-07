@@ -24,7 +24,7 @@ public class SberankPageLess27 {
     public void movCursor(String nameMenu) {
         Actions actions = new Actions(getWebDriver());
         actions.moveToElement($(byXpath("//span[text()='" + nameMenu + "']"))).build().perform();
-       }
+    }
 
     public void goToMenu(String nameMenu) {
         LOGG.info("Переход на меню " + $(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 3000).getText());
@@ -65,7 +65,7 @@ public class SberankPageLess27 {
         }
 
         if (!valueVkladStr.containsAll(VkladList)) {
-           return false;
+            return false;
         } else {
             return true;
         }
@@ -91,7 +91,7 @@ public class SberankPageLess27 {
         }
     }
 
-    public void verefyValue() {
-        $(byXpath("//div[@class='kit-col kit-col_xs_0 kit-col_md_6 kit-col_lg_0 kit-col_md-bottom_10 kit-col_md-top_0']//h2")).getText().equals("Вклад Управляй");
+    public boolean getVkladByName(String vkladName) {
+        return ($(byXpath("//div[contains(@class, 'top_40')]//h2[.='"+ vkladName+"']"))).getText().equals("Вклад Управляй");
     }
 }
