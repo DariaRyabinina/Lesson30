@@ -3,7 +3,7 @@ package org.DariaRyabinina.steps;
 import com.codeborne.selenide.Selenide;
 
 import io.cucumber.java.ru.Допустим;
-import org.DariaRyabinina.Less27ObjSber;
+import org.DariaRyabinina.SberankPageLess27;
 import org.DariaRyabinina.config.ConfigReader;
 import org.DariaRyabinina.config.PropertiesConfigReader;
 import org.slf4j.Logger;
@@ -18,10 +18,10 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
-public class less27StepsjSber {
-    public static final Logger LOGG = LoggerFactory.getLogger(less27StepsjSber.class);
+public class SberbankStepsjless27 {
+    public static final Logger LOGG = LoggerFactory.getLogger(SberbankStepsjless27.class);
     private ConfigReader configReader = new PropertiesConfigReader();
-    protected Less27ObjSber less27ObjSber = new Less27ObjSber();
+    protected SberankPageLess27 less27ObjSber = new SberankPageLess27();
 
     @Допустим("выполнен переход на https: www_sberbank")
     public void goToHttpsWwwSberbank() {
@@ -40,15 +40,15 @@ public class less27StepsjSber {
 
     @Допустим("выполнен переход на вкладку {string}")
     public void goTo1(String nameMenu) {
-        less27ObjSber.movementСursor(nameMenu);
+        less27ObjSber.movCursor(nameMenu);
         less27ObjSber.goToMenu("Вклады");
         LOGG.info("Выполнен переход на вкладку {}", nameMenu);
     }
 
-    @Допустим("выполнен переход на меню {string}")
-    public void goToMenuVklad1(String nameMenu) {
-        less27ObjSber.goToMenuVklad(nameMenu);
-        LOGG.info("Выполнен переход на меню {}", nameMenu);
+    @Допустим("выполнен переход на меню \"Подобрать вклад\"")
+    public void goToMenuVklad1() {
+        less27ObjSber.openMenuVklad();
+        LOGG.info("Выполнен переход на меню \"Подобрать вклад\"");
 
     }
 
@@ -66,7 +66,7 @@ public class less27StepsjSber {
 
     @Допустим("проверка отражения вкладов")
     public void verefyVklad1(List<String> vkladList) {
-        if (less27ObjSber.visibleVklad(vkladList)) {
+        if (less27ObjSber.checkVisibleVklad(vkladList)) {
             LOGG.info("Вклад совпадает");
         } else {
             LOGG.info("Вклад не совпадает");

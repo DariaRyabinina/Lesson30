@@ -18,10 +18,10 @@ import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
-public class Less27ObjSber {
-    public static final Logger LOGG = LoggerFactory.getLogger(Less27ObjSber.class);
+public class SberankPageLess27 {
+    public static final Logger LOGG = LoggerFactory.getLogger(SberankPageLess27.class);
 
-    public void movementСursor(String nameMenu) {
+    public void movCursor(String nameMenu) {
         Actions actions = new Actions(getWebDriver());
         actions.moveToElement($(byXpath("//span[text()='" + nameMenu + "']"))).build().perform();
        }
@@ -31,7 +31,7 @@ public class Less27ObjSber {
         $(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 5000).doubleClick();
     }
 
-    public void goToMenuVklad(String nameMenu) {
+    public void openMenuVklad() {
 
         List<SelenideElement> listMenuVklad = $$(byCssSelector("li.tabs-container__tab"));
         listMenuVklad.get(1).doubleClick();
@@ -51,11 +51,11 @@ public class Less27ObjSber {
         }
 
         if (!valueCheckBoxStr.containsAll(checkBoxList)) {
-            Assert.fail("Чек боксы не совпадают");
-        } else System.out.println("Чек боксы совпадают");
+            Assert.fail("Чек-боксы не совпадают");
+        }
     }
 
-    public boolean visibleVklad(List<String> VkladList) {
+    public boolean checkVisibleVklad(List<String> VkladList) {
 
         List<SelenideElement> vklad = $$(byCssSelector("h3.offered-products__header"));
         List<String> valueVkladStr = new ArrayList<>();
@@ -81,10 +81,7 @@ public class Less27ObjSber {
 
         if (valuevkladStr.containsAll(VkladListDel)) {
             Assert.fail("Вклады не совпадают");
-        } else {
-            System.out.println("Вклады совпадают");
         }
-
     }
 
 

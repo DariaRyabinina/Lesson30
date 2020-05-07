@@ -6,7 +6,6 @@ import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
-import org.DariaRyabinina.Less28ObjAutoRu;
 import org.DariaRyabinina.config.ConfigReader;
 import org.DariaRyabinina.config.PropertiesConfigReader;
 import org.openqa.selenium.By;
@@ -22,10 +21,10 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
-public class Less25Steps {
+public class SpbBankStepsLess25 {
     private ConfigReader configReader = new PropertiesConfigReader();
     private static final String formatManey = "\\d{0,3}\\s\\d{0,3}\\s\\d{0,3}\\.\\d{2}\\s.";
-    public static final Logger LOGG = LoggerFactory.getLogger(Less28ObjAutoRu.class);
+    public static final Logger LOGG = LoggerFactory.getLogger(SpbBankStepsLess25.class);
 
     @Дано("Пользователь авторизуется в bspb")
     public void openBspbSteps() {
@@ -33,9 +32,9 @@ public class Less25Steps {
         open(configReader.getValue("bspb.url"));
     }
 
-
     @Дано("Входит на поле очищает и вставляет Логин/Пароль {string}")
     public void addLoginPasswordSteps(String value) {
+        LOGG.info("Входит на поле очищает и вставляет Логин/Пароль");
         SelenideElement loginFiled = $(byName("username"));
         loginFiled.clear();
         loginFiled.setValue(configReader.getValue(value));
@@ -66,7 +65,7 @@ public class Less25Steps {
 
     @Тогда("Переход на ЭФ Welcome")
     public void goToWelcome() {
-        LOGG.info("Пользователь выполнил переход на ЭФ Welcome");
+        LOGG.info("Пользователь выполняет переход на ЭФ Welcome");
         $(byId("bank-overview")).isDisplayed();
 
     }
@@ -80,7 +79,7 @@ public class Less25Steps {
     @Тогда("Переход на ЭФ Обзор")
     public void goToReview() {
         LOGG.info("Пользователь выполнил переход на ЭФ Обзор -  Интернет банк - Банк Санкт-Петербург");
-        Selenide.title().equals("Обзор -  Интернет банк - Банк Санкт-Петербург");
+        Assert.assertEquals(Selenide.title(), "Обзор - Интернет банк - Банк Санкт-Петербург", "Титул не соответствует ожидаемому");
 
     }
 
@@ -88,7 +87,8 @@ public class Less25Steps {
     public void verifiReview() {
         String namePage = $(byXpath("//@id[.='header-container']/following::h1[1]")).getText();
         namePage = namePage.replaceAll("[^(а-яёА-ЯЁ)]", "");
-        namePage.equals("Обзор");
+        LOGG.info("Проверка названия титула Обзор");
+        Assert.assertEquals(namePage, "Обзор", "Титул не соответствует ожидаемому");
     }
 
     @Тогда("Название блока Финансовая свобода")

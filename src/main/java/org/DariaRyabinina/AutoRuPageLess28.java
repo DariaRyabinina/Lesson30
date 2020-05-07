@@ -11,10 +11,10 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 
-public class Less28ObjAutoRu {
+public class AutoRuPageLess28 {
 
-    public static String namberАnnoun;
-    public static final Logger LOGG = LoggerFactory.getLogger(Less28ObjAutoRu.class);
+    public static String namberAnnoun;
+    public static final Logger LOGG = LoggerFactory.getLogger(AutoRuPageLess28.class);
 
 
     public String getTitle() {
@@ -22,8 +22,8 @@ public class Less28ObjAutoRu {
     }
 
     public void saveNamberManuf(String nameManuf) {
-        namberАnnoun = $(byXpath("//div[text()='" + nameManuf + "']/following-sibling::div")).getText();
-        LOGG.info("Сохраненное количество объявлений производителя {} - {}", nameManuf, namberАnnoun);
+        namberAnnoun = $(byXpath("//div[text()='" + nameManuf + "']/following-sibling::div")).getText();
+        LOGG.info("Сохраненное количество объявлений производителя {} - {}", nameManuf, namberAnnoun);
 
     }
 
@@ -43,15 +43,15 @@ public class Less28ObjAutoRu {
 
     public void compareNambe() {
         String namberOnButton = ($(byCssSelector("span.ButtonWithLoader__content")).waitUntil(Condition.visible, 5000).getText()).replaceAll("[^(0-9)]", "");
-        LOGG.info("Сравнение количества объявлений {} - {}", namberOnButton, namberАnnoun);
-        Assert.assertTrue(CompareNambeonButton(namberOnButton, namberАnnoun),"Количества объвлений не равны");
+        LOGG.info("Сравнение количества объявлений {} - {}", namberOnButton, namberAnnoun);
+        Assert.assertTrue(compareNambeonButton(namberOnButton, namberAnnoun), "Количества объвлений не равны");
 
 
     }
 
     public void saveNamberModel(String nameModel) {
-        namberАnnoun = $(byXpath("//*[@id=\"popularMMM\"]//div[a='" + nameModel + "']/div")).getText();
-        LOGG.info("Сохраненное количество объявлений модели {} - {}", nameModel, namberАnnoun);
+        namberAnnoun = $(byXpath("//*[@id=\"popularMMM\"]//div[a='" + nameModel + "']/div")).getText();
+        LOGG.info("Сохраненное количество объявлений модели {} - {}", nameModel, namberAnnoun);
     }
 
     public void goToModel(String nameModel) {
@@ -59,15 +59,14 @@ public class Less28ObjAutoRu {
         LOGG.info("Переход на форму марки {}", nameModel);
     }
 
-    private static boolean CompareNambeonButton(String namberOnButton, String namberАnnoun) {
-        int namberOnButton1 =Integer.parseInt(namberOnButton);
-        int namberАnnoun1 =Integer.parseInt(namberАnnoun);
-        if(namberOnButton1>(namberАnnoun1-5)&&namberOnButton1<(namberАnnoun1+5)){
+    private static boolean compareNambeonButton(String namberOnButton, String namberAnnoun) {
+        int namberOnButton1 = Integer.parseInt(namberOnButton);
+        int nameAnnou1 = Integer.parseInt(namberAnnoun);
+        if (namberOnButton1 > (nameAnnou1 - 5) && namberOnButton1 < (nameAnnou1 + 5)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
-}
+    }
 
 }
