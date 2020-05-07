@@ -1,10 +1,9 @@
 package org.DariaRyabinina.steps;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+
 import io.cucumber.java.ru.Допустим;
-import org.DariaRyabinina.Less27Obj;
+import org.DariaRyabinina.Less27ObjSber;
 import org.DariaRyabinina.config.ConfigReader;
 import org.DariaRyabinina.config.PropertiesConfigReader;
 import org.slf4j.Logger;
@@ -19,89 +18,85 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
-public class less27Steps {
-    public static final Logger LOGG = LoggerFactory.getLogger(less27Steps.class);
+public class less27StepsjSber {
+    public static final Logger LOGG = LoggerFactory.getLogger(less27StepsjSber.class);
     private ConfigReader configReader = new PropertiesConfigReader();
+    protected Less27ObjSber less27ObjSber = new Less27ObjSber();
 
     @Допустим("выполнен переход на https: www_sberbank")
-    public void go_to_https_www_sberbank() {
+    public void goToHttpsWwwSberbank() {
         open(configReader.getValue("sber.url"));
-
         getWebDriver().manage().window().maximize();
 
 
     }
 
     @Допустим("проверка названия титула {string}")
-    public void verify_Title(String nameTitle) {
-        LOGG.info(Selenide.title());
-        LOGG.info(nameTitle);
-        Assert.assertEquals(Selenide.title(), nameTitle);
+    public void verifyTitle(String nameTitle) {
+        LOGG.info("Титул страницы {}", Selenide.title());
+        Assert.assertEquals(Selenide.title(), nameTitle, "Титул не содержит наименования \"Сбербанк\"");
     }
 
 
     @Допустим("выполнен переход на вкладку {string}")
-    public void go_to_(String nameMenu) {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.movement_cursor(nameMenu);
-        less27Obj.goToMenu("Вклады");
+    public void goTo1(String nameMenu) {
+        less27ObjSber.movementСursor(nameMenu);
+        less27ObjSber.goToMenu("Вклады");
+        LOGG.info("Выполнен переход на вкладку {}", nameMenu);
     }
 
     @Допустим("выполнен переход на меню {string}")
-    public void go_to_menu_Vklad(String nameMenu) {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.go_to_menu_vklad(nameMenu);
+    public void goToMenuVklad1(String nameMenu) {
+        less27ObjSber.goToMenuVklad(nameMenu);
+        LOGG.info("Выполнен переход на меню {}", nameMenu);
 
     }
 
     @Допустим("проверка отображения чек-боксов")
-    public void verify_Check_box(List<String> checkBoxList) {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.visibleCheckBox(checkBoxList);
+    public void verifyCheckBox1(List<String> checkBoxList) {
+        less27ObjSber.visibleCheckBox(checkBoxList);
 
     }
 
     @Допустим("проверка чек-бокса «Онлайн»")
-    public void selected_Online() {
+    public void selectedOnline1() {
         boolean selectedOnline = $(byXpath("//div[text()='Онлайн']/preceding-sibling::input")).isSelected();
-        Assert.assertTrue(selectedOnline);
+        Assert.assertTrue(selectedOnline, "Чек бокс \"Онлайн\" не отмечен");
     }
 
     @Допустим("проверка отражения вкладов")
-    public void verefy_Vklad(List<String> vkladList) {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.visibleVklad(vkladList);
-
+    public void verefyVklad1(List<String> vkladList) {
+        if (less27ObjSber.visibleVklad(vkladList)) {
+            LOGG.info("Вклад совпадает");
+        } else {
+            LOGG.info("Вклад не совпадает");
+        }
     }
 
-
     @Допустим("установка чек-боксов")
-    public void enter_Check_Box(List<String> entrChecBoxValue) {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.enterCheckBox(entrChecBoxValue);
-
+    public void enterCheckBox1(List<String> entrChecBoxValue) {
+        less27ObjSber.enterCheckBox(entrChecBoxValue);
 
     }
 
     @Допустим("проверка отображения вкладов Отсутствуют")
-    public void verefy_vklad_del(List<String> vkladListDel) {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.visibleVkladDel(vkladListDel);
+    public void verefyVkladDel1(List<String> vkladListDel) {
+        less27ObjSber.visibleVkladDel(vkladListDel);
     }
 
     @Допустим("нажать кнопку Подробнее")
-    public void entr_button() {
+    public void entrButton() {
         $(byXpath("//span[text()='Подробнее']")).click();
+
     }
 
     @Допустим("проверка надписи Вклад Управляй.")
-    public void проверка_надписи_Вклад_Управляй() {
-        Less27Obj less27Obj = new Less27Obj();
-        less27Obj.verefyValue();
+    public void verefyValue1() {
+        less27ObjSber.verefyValue();
     }
 
     @Допустим("переключение на новое окно")
-    public void swich_to_window() {
+    public void swichToWindow1() {
         Selenide.switchTo().window(1);
 
     }

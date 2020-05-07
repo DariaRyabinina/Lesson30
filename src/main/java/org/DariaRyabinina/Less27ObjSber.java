@@ -18,22 +18,20 @@ import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
-public class Less27Obj {
-    public static final Logger LOGG = LoggerFactory.getLogger(Less27Obj.class);
+public class Less27ObjSber {
+    public static final Logger LOGG = LoggerFactory.getLogger(Less27ObjSber.class);
 
-    public void movement_cursor(String nameMenu) {
+    public void movementСursor(String nameMenu) {
         Actions actions = new Actions(getWebDriver());
-        LOGG.info($(byXpath("//span[text()='" + nameMenu + "']")).getText());
         actions.moveToElement($(byXpath("//span[text()='" + nameMenu + "']"))).build().perform();
-
-    }
+       }
 
     public void goToMenu(String nameMenu) {
-        LOGG.info($(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 3000).getText());
+        LOGG.info("Переход на меню " + $(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 3000).getText());
         $(byXpath("//a[@class='lg-menu__sub-link' and text()='" + nameMenu + "']")).waitUntil(Condition.visible, 5000).doubleClick();
     }
 
-    public void go_to_menu_vklad(String nameMenu) {
+    public void goToMenuVklad(String nameMenu) {
 
         List<SelenideElement> listMenuVklad = $$(byCssSelector("li.tabs-container__tab"));
         listMenuVklad.get(1).doubleClick();
@@ -47,9 +45,8 @@ public class Less27Obj {
 
         Selenide.switchTo().frame("iFrameResizer0");
         List<SelenideElement> checkBox = $$(byCssSelector(".kitt-checkbox__text"));
-        System.out.println(checkBox.size());
         for (SelenideElement valueCheckBox : checkBox) {
-            System.out.println(valueCheckBox.getText());
+
             valueCheckBoxStr.add(valueCheckBox.getText());
         }
 
@@ -58,30 +55,27 @@ public class Less27Obj {
         } else System.out.println("Чек боксы совпадают");
     }
 
-    public void visibleVklad(List<String> VkladList) {
-        System.out.println("---------------------");
+    public boolean visibleVklad(List<String> VkladList) {
+
         List<SelenideElement> vklad = $$(byCssSelector("h3.offered-products__header"));
-        List<String> valuevkladStr = new ArrayList<>();
-        System.out.println(vklad.size());
+        List<String> valueVkladStr = new ArrayList<>();
+
         for (SelenideElement valueCheckBox : vklad) {
-            System.out.println(valueCheckBox.getText());
-            valuevkladStr.add(valueCheckBox.getText());
+            valueVkladStr.add(valueCheckBox.getText());
         }
 
-        if (!valuevkladStr.containsAll(VkladList)) {
-            Assert.fail("Вклады не совпадают");
+        if (!valueVkladStr.containsAll(VkladList)) {
+           return false;
         } else {
-            System.out.println("Вклады совпадают");
+            return true;
         }
-
     }
 
     public void visibleVkladDel(List<String> VkladListDel) {
-        System.out.println("---------------------2");
+
         List<SelenideElement> vklad = $$(byCssSelector("h3.offered-products__header"));
         List<String> valuevkladStr = new ArrayList<>();
         for (SelenideElement valueCheckBox : vklad) {
-            System.out.println(valueCheckBox.getText());
             valuevkladStr.add(valueCheckBox.getText());
         }
 

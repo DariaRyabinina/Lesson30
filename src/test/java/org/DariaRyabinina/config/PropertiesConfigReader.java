@@ -12,6 +12,7 @@ public class PropertiesConfigReader implements ConfigReader {
         try (InputStream inputStream = contextClassLoader.getResourceAsStream("config/config.properties")) {
             properties.load(inputStream);
         } catch (IOException e) {
+            System.out.println("Метод вазван в неправильное время");
             throw new IllegalStateException(e);
         }
     }

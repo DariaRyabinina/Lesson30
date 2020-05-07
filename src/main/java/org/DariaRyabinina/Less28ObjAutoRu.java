@@ -11,10 +11,10 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 
-public class Less28Obj {
+public class Less28ObjAutoRu {
 
     public static String namberАnnoun;
-    public static final Logger LOGG = LoggerFactory.getLogger(Less28Obj.class);
+    public static final Logger LOGG = LoggerFactory.getLogger(Less28ObjAutoRu.class);
 
 
     public String getTitle() {
@@ -44,7 +44,8 @@ public class Less28Obj {
     public void compareNambe() {
         String namberOnButton = ($(byCssSelector("span.ButtonWithLoader__content")).waitUntil(Condition.visible, 5000).getText()).replaceAll("[^(0-9)]", "");
         LOGG.info("Сравнение количества объявлений {} - {}", namberOnButton, namberАnnoun);
-        Assert.assertEquals(namberOnButton, namberАnnoun);
+        Assert.assertTrue(CompareNambeonButton(namberOnButton, namberАnnoun),"Количества объвлений не равны");
+
 
     }
 
@@ -57,5 +58,16 @@ public class Less28Obj {
         $(byXpath("//a[text()='" + nameModel + "']")).click();
         LOGG.info("Переход на форму марки {}", nameModel);
     }
+
+    private static boolean CompareNambeonButton(String namberOnButton, String namberАnnoun) {
+        int namberOnButton1 =Integer.parseInt(namberOnButton);
+        int namberАnnoun1 =Integer.parseInt(namberАnnoun);
+        if(namberOnButton1>(namberАnnoun1-5)&&namberOnButton1<(namberАnnoun1+5)){
+            return true;
+        }
+        else {
+            return false;
+        }
+}
 
 }
